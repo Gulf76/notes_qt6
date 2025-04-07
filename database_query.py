@@ -58,7 +58,28 @@ def request_query(text, status, date_create):
             connection.close()
             print("Соединение завершено!")
     else:
-        pass
+        try:
+            connection = psycopg2.connect(
+                database='postgres',
+                user='postgres',
+                password=password,
+                host='127.0.0.1',
+                port=5432
+            )
+            cursor = connection.cursor()
+
+            query = '''
+                update logs set status = 'Удалена' where text = 'text'
+            '''
+            cursor.execute(query)
+            connection.commit()
+            print("Соединение выполнено успешно!")
+        except:
+            print("Ошибка!")
+        finally:
+
+            connection.close()
+            print("Соединение завершено!")
 
 
 def get_active_notes():

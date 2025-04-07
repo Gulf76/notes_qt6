@@ -27,7 +27,9 @@ class Example(QMainWindow, Ui_MainWindow):
 
     def del_task(self):
         index = self.listWidget.currentRow()
-        text = self.listWidget.item(index)
+        #text = self.listWidget.item(index)
+        current_item = self.listWidget.currentItem()
+        text = current_item.text()
         self.listWidget.takeItem(index)
         request_query(text, "Удалена", datetime.now())
 
